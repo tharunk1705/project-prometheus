@@ -1,0 +1,173 @@
+@import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+
+*{
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    position: relative;
+    background-image: linear-gradient(to top, #f43b47 0%, #453a94 100%);
+    width: 100%;
+    min-height: 100%;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    
+}
+.base-component{
+    width: 100vw;
+}
+
+.menu .navbar-brand {
+    font-family: 'Questrial', sans-serif !important;
+    text-shadow: 3px 5px 5px rgba(0, 0, 0, 0.4), -3px -5px 5px rgba(0, 0, 0, 0.4);
+}
+
+.nav-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 4px;
+    border-radius: 2px 12px 2px 12px;
+    background-color: rgba(0, 0, 0, 0.1);
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1), -1px -1px 1px rgba(0, 0, 0, 0.1);
+}
+.nav-item:hover {
+    background-color: white;
+    border: none;
+    border-radius: 2px 12px 2px 12px;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1), -1px -1px 1px rgba(0, 0, 0, 0.1);
+}
+.nav-item:hover .nav-link{
+    color: #453a94 !important;
+}
+.nav-link {
+    color: rgba(255, 255, 255, 0.7) !important; 
+    font-family: 'Questrial', sans-serif;
+}
+
+.navbar-toggler {
+    outline: none !important;
+    border: none !important;
+    color: white !important;
+    font-size: 24px !important;
+}
+
+.home-row{
+    margin-bottom: 100px;
+}
+
+.signup-row{
+    margin-bottom: 100px;
+}
+
+.jumbotron-custom {
+    background: rgba( 116, 116, 116, 0.25 ) !important;
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 ) !important;
+    backdrop-filter: blur( 4px ) !important;
+    -webkit-backdrop-filter: blur( 4px ) !important;
+    border-radius: 10px !important;
+    border: 1px solid rgba( 255, 255, 255, 0.18 ) !important;
+    font-family: 'Poppins', sans-serif !important;
+    color: white !important;
+    padding: 20px 30px !important;
+}
+
+.jumbotron-custom h1{
+    overflow-y: hidden !important;
+    font-weight: bold;
+}
+
+.jumbotron-custom h2{
+    overflow-y: hidden !important;
+    font-weight: bold;
+}
+
+.jumbotron-custom button{
+    margin: 0 auto;
+    display: block;
+    padding: 6px 25px;
+    border: none;
+    border-radius: 2px 12px 2px 12px;
+    background-color: white ;
+    color: #453a94;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1), -1px -1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary {
+    margin: 0 auto !important;
+    display: block !important;
+    padding: 6px 25px !important;
+    border: none !important;
+    border-radius: 2px 12px 2px 12px !important;
+    background-color: white !important;
+    color: #453a94 !important;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1), -1px -1px 1px rgba(0, 0, 0, 0.1) !important;
+}
+
+.btn-primary:hover {
+    background-color: rgb(2,117,216) !important;
+    color: #fff !important;
+}
+
+.btn-primary:focus {
+    transform: scale(0.9);
+}
+
+.my-2 {
+    background-color: aliceblue;
+}
+
+input::placeholder {
+    color: rgba(0, 0, 0, 0.5) !important;
+}
+
+input:focus {
+    caret-color: #453a94;
+    outline: none !important;
+    background-color: rgba(2,117,216, 0.6) !important;
+    color: #fff !important;
+    border: none !important; 
+    box-shadow: none !important;
+}
+input:active, ::placeholder {
+    color: #fff !important;
+}
+input:focus, ::placeholder {
+    color: #fff !important;
+}
+
+::selection {
+    color:#453a94;
+    background: rgba( 255, 255, 255, 0.5 );
+}
+
+
+
+/* 
+footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.2) !important;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1), -1px -1px 1px rgba(0, 0, 0, 0.1);
+} */
+
+@media only screen and (min-width: 992px) {
+    body{
+        height: 100vh;
+    }
+    .jumbotron-custom {
+        margin: 20px;
+    }
+}
+
