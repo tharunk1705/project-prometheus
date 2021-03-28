@@ -1,11 +1,10 @@
 import React, {useState} from 'react';
 import Base from "../core/Base";
-import {isAuthenticated, signup} from "../auth/helper"
+import {signupasdonor} from "../auth/helper"
 import { Button, Form, FormGroup, Label, Input, Row, Col, Jumbotron } from 'reactstrap';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-// TODO: INCOMPLETE 
 
 const SignupAsDonor = () => {
     const [values, setValues] = useState({
@@ -13,17 +12,15 @@ const SignupAsDonor = () => {
         lastName : "",
         email : "",
         phone : "",
-        info : "",
-        isAvailable : true,
-        category : "",
+        infor : "",
         location : "",
+        isAvailable : true,
+        lastDonation : "",
         error : "",
         success : false
     });
 
-    const {user : {firstName, lastName, email, phone, _id}} = isAuthenticated();
-
-    const { isAvailable, category, phone, error, success} = values;
+    const { firstName, lastName, email, location, phone, isAvailable, info, lastDonation, error, success} = values;
 
     const handleChange = name => event => {
         setValues({...values, error : false, [name] : event.target.value});
@@ -33,7 +30,7 @@ const SignupAsDonor = () => {
         event.preventDefault();
 
         setValues({...values, error : false});
-        signup({firstName, lastName, email, password, phone})
+        signupasdonor({firstName, lastName, email,info, location, phone, isAvailable, lastDonation})
             .then( data => {
                 if(data.error) {
                     setValues({...values, error : data.error, success : false});
@@ -43,9 +40,13 @@ const SignupAsDonor = () => {
                         ...values,
                         firstName : "",
                         lastName : "",
+                        info : "",
+                        isAvailable : true,
+                        category : "",
+                        location : "",
+                        lastDonation : "",
                         email : "",
                         phone : "",
-                        password : "",
                         error : "",
                         success : false
                     });
@@ -60,7 +61,7 @@ const SignupAsDonor = () => {
             <Row className="signup-row">
                 <Col md={{size  : 6, offset : 3}} className="text-left">
                     <Jumbotron className="jumbotron-custom" >
-                        <h1 className="display-5 text-center pb-2">Signup Here!</h1>
+                        <h1 className="display-5 text-center pb-2">Signup As a Donor!</h1>
                         <hr className="my-2" />
                         <Form>
                             <FormGroup>
@@ -72,6 +73,7 @@ const SignupAsDonor = () => {
                                     placeholder="Enter Minimum 3 character" 
                                     onChange={handleChange("firstName")}
                                     value={firstName}
+                                    disabled
                                 />
                             </FormGroup>
                             <FormGroup>
@@ -83,6 +85,7 @@ const SignupAsDonor = () => {
                                     placeholder="Enter Minimum 3 character" 
                                     onChange={handleChange("lastName")}
                                     value={lastName}
+                                    disabled
                                 />
                             </FormGroup>
                             <FormGroup>
@@ -94,6 +97,7 @@ const SignupAsDonor = () => {
                                     placeholder="example@example.com" 
                                     onChange={handleChange("email")}
                                     value={email}
+                                    disabled
                                 />
                             </FormGroup>
                             <FormGroup>
@@ -105,17 +109,59 @@ const SignupAsDonor = () => {
                                     placeholder="9876543210" 
                                     onChange={handleChange("phone")}
                                     value={phone}
+                                    disabled
                                 />
                             </FormGroup>
                             <FormGroup>
-                                <Label className="text-light" for="password">Password :</Label>
+                                <Label className="text-light" for="location">Location :</Label>
                                 <Input 
-                                    type="password" 
-                                    name="password" 
-                                    id="password" 
-                                    placeholder="Should be greater than 3 characters" 
-                                    onChange={handleChange("password")}
-                                    value={password}
+                                    type="text" 
+                                    name="location" 
+                                    id="location" 
+                                    placeholder="Enter your current location" 
+                                    onChange={handleChange("location")}
+                                    value={location}
+                                />
+                            </FormGroup>
+                            <FormGroup>
+                                <Label className="text-light" for="lastDonation">Last Donation :</Label>
+                                <Input 
+                                    type="date" 
+                                    name="lastDonation" 
+                                    id="lastDonation" 
+                                    placeholder="Any remarks" 
+                                    onChange={handleChange("lastDonation")}
+                                    value={lastDonation}
+                                />
+                            </FormGroup>
+                            <FormGroup>
+                                <Label className="text-light" for="info">Remarks :</Label>
+                                <Input 
+                                    type="text" 
+                                    name="info" 
+                                    id="info" 
+                                    placeholder="Any remarks" 
+                                    onChange={handleChange("info")}
+                                    value={info}
+                                />
+                            </FormGroup>
+                            <FormGroup>
+                                <Label className="text-light" for="isAvailable">Available :</Label>
+                                <Input 
+                                    type="radio" 
+                                    name="isAvailable" 
+                                    id="notAvailable" 
+                                    onChange={handleChange("isAvailable")}
+                                    value={false}
+                                    className="ml-2"
+                                />
+                                <Input 
+                                    type="radio" 
+                                    name="isAvailable" 
+                                    id="Available" 
+                                    onChange={handleChange("isAvailable")}
+                                    value={true}
+                                    className="ml-4"
                                 />
                             </FormGroup>
                             <Button color="primary" onClick={handleSubmit} >Signup</Button>
@@ -159,4 +205,4 @@ const SignupAsDonor = () => {
     );
 }
 
-export default Signup;
+export default SignupAsDonor;

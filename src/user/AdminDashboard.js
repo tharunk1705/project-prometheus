@@ -42,6 +42,11 @@ const AdminDashboard = () => {
                                         Manage Category
                                     </Link>
                                 </ListGroupItem>
+                                <ListGroupItem>
+                                    <Link to="/admin/donors">
+                                        Manage Donors
+                                    </Link>
+                                </ListGroupItem>
                             </ListGroup>
                         </Jumbotron>
                     </Col>

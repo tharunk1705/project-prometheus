@@ -76,3 +76,13 @@ export const updateCategory = (categoryId,userId, token, category) => {
 }
 
 
+// get all donors
+export const getDonors = (userId) => {
+    return fetch(`${API}/admin/donors/${userId}`,{
+        method : "GET"
+    })
+        .then(response => {
+            return response.json();
+        })
+        .catch(err => console.log(err));
+}

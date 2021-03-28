@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { isAuthenticated } from '../auth/helper';
 import Base from "../core/Base";
 import { createCategory} from "./helper/adminApiCalls";
-import { Button, Form, FormGroup, Label, Input, Row, Col, Jumbotron } from 'reactstrap';
+import { Button, Form, FormGroup, Input, Row, Col, Jumbotron } from 'reactstrap';
 const AddCategory = () => {
     const [name, setName] = useState("");
     const [error, setError] = useState(false);
