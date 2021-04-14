@@ -1,18 +1,19 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Base from "../core/Base";
-import {signupasdonor} from "../auth/helper"
+import {isAuthenticated, signupasdonor} from "../auth/helper"
 import { Button, Form, FormGroup, Label, Input, Row, Col, Jumbotron } from 'reactstrap';
 import { ToastContainer, toast } from 'react-toastify';
+import { getCategories} from "./helper/userApiCalls";
 import 'react-toastify/dist/ReactToastify.css';
 
 
 const SignupAsDonor = () => {
+    const [categories, setCategories] = useState([]);
+    const {user, token} = isAuthenticated();
+    const userId = user._id;
     const [values, setValues] = useState({
-        firstName : "",
-        lastName : "",
-        email : "",
-        phone : "",
-        infor : "",
+        category : "",
+        info : "",
         location : "",
         isAvailable : true,
         lastDonation : "",
@@ -20,7 +21,22 @@ const SignupAsDonor = () => {
         success : false
     });
 
-    const { firstName, lastName, email, location, phone, isAvailable, info, lastDonation, error, success} = values;
+    const preload = () => {
+        getCategories().then(data => {
+            if(data.error) {
+                console.log("UNABLE TO FETCH CATEGORIES");
+            }else {
+                setCategories(data);
+            }
+        })
+    }
+
+    const { category, location, isAvailable, info, lastDonation, error, success} = values;
+
+    useEffect(() => {
+        preload();
+    }, []);
+
 
     const handleChange = name => event => {
         setValues({...values, error : false, [name] : event.target.value});
@@ -30,23 +46,18 @@ const SignupAsDonor = () => {
         event.preventDefault();
 
         setValues({...values, error : false});
-        signupasdonor({firstName, lastName, email,info, location, phone, isAvailable, lastDonation})
+        signupasdonor(user._id, token, {userId, category, info, location, isAvailable, lastDonation})
             .then( data => {
                 if(data.error) {
                     setValues({...values, error : data.error, success : false});
                     message(error);
                 }else {
                     setValues({
-                        ...values,
-                        firstName : "",
-                        lastName : "",
                         info : "",
                         isAvailable : true,
                         category : "",
                         location : "",
                         lastDonation : "",
-                        email : "",
-                        phone : "",
                         error : "",
                         success : false
                     });
@@ -65,52 +76,18 @@ const SignupAsDonor = () => {
                         <hr className="my-2" />
                         <Form>
                             <FormGroup>
-                                <Label className="text-light" for="firstName">First Name :</Label>
+                                <Label className="text-light" for="category">Blood Type : </Label>
                                 <Input 
-                                    type="text" 
-                                    name="firstName" 
-                                    id="firstName" 
-                                    placeholder="Enter Minimum 3 character" 
-                                    onChange={handleChange("firstName")}
-                                    value={firstName}
-                                    disabled
-                                />
-                            </FormGroup>
-                            <FormGroup>
-                                <Label className="text-light" for="lastName">Last Name :</Label>
-                                <Input 
-                                    type="text" 
-                                    name="lastName" 
-                                    id="lastName" 
-                                    placeholder="Enter Minimum 3 character" 
-                                    onChange={handleChange("lastName")}
-                                    value={lastName}
-                                    disabled
-                                />
-                            </FormGroup>
-                            <FormGroup>
-                                <Label className="text-light" for="email">Email :</Label>
-                                <Input 
-                                    type="email" 
-                                    name="email" 
-                                    id="email" 
-                                    placeholder="example@example.com" 
-                                    onChange={handleChange("email")}
-                                    value={email}
-                                    disabled
-                                />
-                            </FormGroup>
-                            <FormGroup>
-                                <Label className="text-light" for="phone">Phone :</Label>
-                                <Input 
-                                    type="tel" 
-                                    name="phone" 
-                                    id="phone" 
-                                    placeholder="9876543210" 
-                                    onChange={handleChange("phone")}
-                                    value={phone}
-                                    disabled
-                                />
+                                    type="select" 
+                                    onChange={handleChange("category")}
+                                >
+                                    <option>--Select--</option>
+                                    {categories.map((category, index) => {
+                                        return(
+                                            <option key={index} value={category._id}>{category.name}</option>
+                                        );
+                                    })}
+                                </Input>
                             </FormGroup>
                             <FormGroup>
                                 <Label className="text-light" for="location">Location :</Label>
@@ -147,22 +124,28 @@ const SignupAsDonor = () => {
                             </FormGroup>
                             <FormGroup>
                                 <Label className="text-light" for="isAvailable">Available :</Label>
-                                <Input 
-                                    type="radio" 
-                                    name="isAvailable" 
-                                    id="notAvailable" 
-                                    onChange={handleChange("isAvailable")}
-                                    value={false}
-                                    className="ml-2"
-                                />
-                                <Input 
-                                    type="radio" 
-                                    name="isAvailable" 
-                                    id="Available" 
-                                    onChange={handleChange("isAvailable")}
-                                    value={true}
-                                    className="ml-4"
-                                />
+                                <FormGroup check>
+                                    <Label check>
+                                        <Input 
+                                            type="radio" 
+                                            name="isAvailable" 
+                                            id="notAvailable" 
+                                            onChange={handleChange("isAvailable")}
+                                            value={false}
+                                        />Not Available
+                                    </Label>
+                                </FormGroup>
+                                <FormGroup check>
+                                    <Label check>
+                                        <Input 
+                                            type="radio" 
+                                            name="isAvailable" 
+                                            id="Available" 
+                                            onChange={handleChange("isAvailable")}
+                                            value={true}
+                                        />Available
+                                    </Label>
+                                </FormGroup>
                             </FormGroup>
                             <Button color="primary" onClick={handleSubmit} >Signup</Button>
                         </Form>

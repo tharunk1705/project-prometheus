@@ -17,7 +17,7 @@ const Home = () => {
             <Row className="mt-4 home-row">
                 <Col md="6">
                     <Jumbotron className="jumbotron-custom" >
-                        <h2>Welcome to Nectar!</h2>
+                        <h2>Welcome to your LYFLINE!</h2>
                         <p className="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor explicabo, illo impedit pariatur temporibus, in, perspiciatis facilis rem ut sequi ad consequatur praesentium modi! Alias aliquid pariatur inventore impedit cupiditate.</p>
                         <hr className="my-2" />
                         <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iure quia odio dignissimos illo quas esse, sunt sint aliquid impedit nemo sequi repellendus, rem voluptates qui ab suscipit officiis vitae aliquam.</p>

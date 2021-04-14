@@ -75,7 +75,7 @@ const ManageCategories = () => {
                                 )}
                             </Col>
                         </Row>
-                        <Row>
+                        <Row >
                             <Col md={{size  : 6, offset : 3}} className="text-left">
                                 <Button 
                                     tag={Link} 

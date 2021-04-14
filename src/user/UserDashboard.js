@@ -3,6 +3,7 @@ import Base from "../core/Base";
 import {isAuthenticated} from "../auth/helper";
 import {
     Container,
+    Badge,
     Col,
     Row,
     Jumbotron,
@@ -20,7 +21,9 @@ const UserDashboard = () => {
                 <Row className="mt-4 p-3">
                     <Col md={{size : "6", offset : "3"}}>
                         <Jumbotron className="jumbotron-custom" >
-                            <h2 className="display-5 text-center">Welcome {firstName}!</h2>
+                            <h2 className="display-5 text-center">Welcome {firstName}! {isAuthenticated() && isAuthenticated().user.isDonor === true && (
+                                <Badge color="primary">Donor</Badge>
+                            )}</h2>
                             <hr className="my-2" />
                             <Row>
                                 <Col md={{size : "4", offset : "2"}} >First Name : </Col>
@@ -39,12 +42,25 @@ const UserDashboard = () => {
                                 <Col md="6">{phone}</Col>
                             </Row>
                             <Row>
-                                <Col   md="6">
-                                    <Button color="primary" className="mt-4" tag={Link} to={`/user/${_id}/update`}>Update Details</Button>
-                                </Col>
-                                <Col  md="6" >
-                                    <Button color="primary" className="mt-4" tag={Link} to={`/user/${_id}/signup-as-donor`}>Signup As Donor</Button>
-                                </Col>
+                                
+                                {isAuthenticated() && isAuthenticated().user.isDonor === false && (
+                                    <>
+                                        <Col   md="6">
+                                            <Button color="primary" className="mt-4" tag={Link} to={`/user/${_id}/update`}>Update Details</Button>
+                                        </Col>
+                                        <Col  md="6" >
+                                            <Button color="primary" className="mt-4" tag={Link} to={`/user/${_id}/signup-as-donor`}>Signup As Donor</Button>
+                                        </Col>
+                                    </>
+                                )}
+                                {isAuthenticated() && isAuthenticated().user.isDonor === true && (
+                                    <>
+                                        <Col md="12">
+                                            <Button color="primary" className="mt-4" tag={Link} to={`/user/${_id}/update`}>Update Details</Button>
+                                        </Col>
+                                    </>
+                                )}
+                                
                             </Row>
                             
                         </Jumbotron>

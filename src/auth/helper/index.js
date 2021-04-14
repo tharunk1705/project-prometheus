@@ -70,8 +70,8 @@ export const isAuthenticated = () => {
     }
 }
 
-export const signupasdonor = (userId, donor) => {
-    return fetch(`${API}/user/${userId}/donor/signup`, {
+export const signupasdonor = (user, token, donor) => {
+    return fetch(`${API}/user/${user}/donor/signup`, {
         method : "POST",
         headers : {
             Accept : "application/json",

@@ -14,9 +14,9 @@ const Base = ({
         <div className={className}>
             <Menu></Menu>
             <Container fluid>
-                <div >{children}</div>
+                {children}
             </Container>
-            <footer className="text-center text-white p-4"> &copy; 2021 Prometheus. All Rights Reserved.</footer>
+            <footer className="text-center text-white"> &copy; 2021 Lyfline. All Rights Reserved.</footer>
         </div>
     );
 }
