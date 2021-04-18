@@ -24,7 +24,7 @@ const NotFound = () => {
                         </Jumbotron>
                     </Col>
                     <Col md={{size : 5, offset : 1}}>
-                        <img src={NotFoundImg} class="img-fluid" alt="A 404 illustration" />
+                        <img src={NotFoundImg} className="img-fluid" alt="A 404 illustration" />
                     </Col>
                 </Row>
             </Container>

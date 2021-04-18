@@ -27,7 +27,7 @@ const Home = () => {
                     </Jumbotron>
                 </Col>
                 <Col md={{size : 5, offset : 1}}>
-                    <img src={main} class="img-fluid" alt="Blood Donation" />
+                    <img src={main} className="img-fluid" alt="Blood Donation" />
                 </Col>
             </Row>
         </Base>

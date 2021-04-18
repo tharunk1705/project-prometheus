@@ -42,7 +42,6 @@ const Signin = () => {
                     });    
                 }
             })
-            .catch(console.log("Signin request failed"));
     }
 
     const performRedirect = () => {

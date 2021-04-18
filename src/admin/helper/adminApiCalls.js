@@ -77,8 +77,8 @@ export const updateCategory = (categoryId,userId, token, category) => {
 
 
 // get all donors
-export const getDonors = (userId) => {
-    return fetch(`${API}/admin/donors/${userId}`,{
+export const getDonors = () => {
+    return fetch(`${API}/donors`,{
         method : "GET"
     })
         .then(response => {

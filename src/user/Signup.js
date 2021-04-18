@@ -4,6 +4,7 @@ import {signup} from "../auth/helper"
 import { Button, Form, FormGroup, Label, Input, Row, Col, Jumbotron } from 'reactstrap';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useHistory } from 'react-router-dom';
 
 const Signup = () => {
     const [values, setValues] = useState({
@@ -15,6 +16,8 @@ const Signup = () => {
         error : "",
         success : false
     });
+
+    let history = useHistory();
 
     const { firstName, lastName, email, password, phone, error, success} = values;
 
@@ -43,6 +46,10 @@ const Signup = () => {
                         success : false
                     });
                     message(success);
+                    setTimeout(() => {
+                        history.push("/signin");
+                    }, 1000);
+                    
                 }
             })
             .catch(err => console.log(err));
@@ -121,7 +128,7 @@ const Signup = () => {
     const message = (error) => {
         if(error) {
             toast.error(error, {
-                position: "top-right",
+                position: "bottom-right",
                 autoClose: 5000,
                 hideProgressBar: false,
                 closeOnClick: true,
@@ -131,7 +138,7 @@ const Signup = () => {
                 });
         }else {
             toast.success('Successfully Signedup!', {
-                position: "top-right",
+                position: "bottom-right",
                 autoClose: 5000,
                 hideProgressBar: false,
                 closeOnClick: true,
@@ -139,6 +146,7 @@ const Signup = () => {
                 draggable: true,
                 progress: undefined,
                 });
+            
         }
     }
 

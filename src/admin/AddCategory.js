@@ -69,7 +69,7 @@ const AddCategory = () => {
                     value={name}
                     autoFocus
                     required
-                    placeholder="For Eg. Summer Collection"
+                    placeholder="For Eg. A+ / B+ "
                 />
                 <Button 
                     color="primary"

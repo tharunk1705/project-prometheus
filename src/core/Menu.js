@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
     Collapse,
@@ -23,23 +23,18 @@ const Menu = ({history}) => {
 
     const toggle = () => setIsOpen(!isOpen);
 
+    
     return (
         <div>
             <Navbar className="menu" dark expand="md">
                 <NavbarBrand tag={Link} to="/">
-                    <img src={leftLogo} width="30" height="30"
-                    />
+                    <img src={leftLogo} width="30" height="30" alt="logo-left"/>
                     <span>Lyfline</span>
-                    <img src={rightLogo} width="30" height="30"
-                    />
+                    <img src={rightLogo} width="30" height="30" alt="logo-left" />
                 </NavbarBrand>
                 <NavbarToggler onClick={toggle} className="mb-1"/>
                 <Collapse isOpen={isOpen} navbar>
                     <NavbarText>Every drop matters!</NavbarText>
-                    {/* <motion.div
-                        animate={isOpen ? "open" : "closed"}
-                        variants={variants}
-                    > */}
                         <Nav className="ml-auto" navbar>
                             <NavItem>
                                 <NavLink tag={RRNavLink} to="/">Home</NavLink>
@@ -85,7 +80,6 @@ const Menu = ({history}) => {
                                 </NavItem>
                             )}       
                         </Nav>
-                    {/* </motion.div> */}
                 </Collapse>
             </Navbar>
         </div>

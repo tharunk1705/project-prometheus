@@ -1,24 +1,24 @@
 import React, {useEffect, useState} from 'react';
 import Base from "../core/Base";
-import {isAuthenticated, signupasdonor} from "../auth/helper"
+import { isAuthenticated, signupasdonor} from "../auth/helper";
 import { Button, Form, FormGroup, Label, Input, Row, Col, Jumbotron } from 'reactstrap';
 import { ToastContainer, toast } from 'react-toastify';
 import { getCategories} from "./helper/userApiCalls";
 import 'react-toastify/dist/ReactToastify.css';
-
 
 const SignupAsDonor = () => {
     const [categories, setCategories] = useState([]);
     const {user, token} = isAuthenticated();
     const userId = user._id;
     const [values, setValues] = useState({
-        category : "",
-        info : "",
+        bloodType : "",
+        remarks : "",
         location : "",
         isAvailable : true,
         lastDonation : "",
         error : "",
-        success : false
+        success : false,
+        didRedirect : false
     });
 
     const preload = () => {
@@ -31,7 +31,7 @@ const SignupAsDonor = () => {
         })
     }
 
-    const { category, location, isAvailable, info, lastDonation, error, success} = values;
+    const { bloodType, location, isAvailable, remarks, lastDonation, error, success} = values;
 
     useEffect(() => {
         preload();
@@ -46,26 +46,27 @@ const SignupAsDonor = () => {
         event.preventDefault();
 
         setValues({...values, error : false});
-        signupasdonor(user._id, token, {userId, category, info, location, isAvailable, lastDonation})
+        signupasdonor(user._id, token, {userId, bloodType, remarks, location, isAvailable, lastDonation})
             .then( data => {
                 if(data.error) {
                     setValues({...values, error : data.error, success : false});
                     message(error);
                 }else {
                     setValues({
-                        info : "",
+                        bloodType : "",
+                        remarks : "",
                         isAvailable : true,
-                        category : "",
                         location : "",
                         lastDonation : "",
                         error : "",
-                        success : false
+                        success : true,
                     });
                     message(success);
                 }
             })
             .catch(err => console.log(err));
     }
+
 
     const signUpForm = () => {
         return(
@@ -79,12 +80,12 @@ const SignupAsDonor = () => {
                                 <Label className="text-light" for="category">Blood Type : </Label>
                                 <Input 
                                     type="select" 
-                                    onChange={handleChange("category")}
+                                    onChange={handleChange("bloodType")}
                                 >
                                     <option>--Select--</option>
                                     {categories.map((category, index) => {
                                         return(
-                                            <option key={index} value={category._id}>{category.name}</option>
+                                            <option key={index} value={category.name}>{category.name}</option>
                                         );
                                     })}
                                 </Input>
@@ -106,20 +107,20 @@ const SignupAsDonor = () => {
                                     type="date" 
                                     name="lastDonation" 
                                     id="lastDonation" 
-                                    placeholder="Any remarks" 
+                                    placeholder="Last Date of Donation" 
                                     onChange={handleChange("lastDonation")}
                                     value={lastDonation}
                                 />
                             </FormGroup>
                             <FormGroup>
-                                <Label className="text-light" for="info">Remarks :</Label>
+                                <Label className="text-light" for="remarks">Remarks :</Label>
                                 <Input 
                                     type="text" 
-                                    name="info" 
-                                    id="info" 
+                                    name="remarks" 
+                                    id="remarks" 
                                     placeholder="Any remarks" 
-                                    onChange={handleChange("info")}
-                                    value={info}
+                                    onChange={handleChange("remarks")}
+                                    value={remarks}
                                 />
                             </FormGroup>
                             <FormGroup>
@@ -157,7 +158,7 @@ const SignupAsDonor = () => {
     const message = (error) => {
         if(error) {
             toast.error(error, {
-                position: "top-right",
+                position: "bottom-right",
                 autoClose: 5000,
                 hideProgressBar: false,
                 closeOnClick: true,
@@ -166,8 +167,8 @@ const SignupAsDonor = () => {
                 progress: undefined,
                 });
         }else {
-            toast.success('Successfully Signedup!', {
-                position: "top-right",
+            toast.success('Successfully Signedup as a Donor! Please Signout and SignIn once again to see changes', {
+                position: "bottom-right",
                 autoClose: 5000,
                 hideProgressBar: false,
                 closeOnClick: true,
