@@ -38,4 +38,28 @@ export const searchDonor = (token, bloodType, location) => {
         })
         .catch(err=>console.log(err));
 }
-// export const 
+
+export const createResource = (resource) => {
+    return fetch(`${API}/resource/create`, {
+        method : "POST",
+        headers : {
+            Accept : "application/json",
+            "Content-Type" : "application/json",
+        },
+        body : JSON.stringify(resource)
+    })
+        .then(response => {
+            return response.json();
+        })
+        .catch(err=>console.log(err));
+}
+
+export const getAllResources = () => {
+    return fetch(`${API}/resource/available`,{
+        method : "GET"
+    })
+        .then(response => {
+            return response.json();
+        })
+        .catch(err => console.log(err));
+} 

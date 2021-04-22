@@ -1,8 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import Base from "../core/Base";
-import {Button, Form, FormGroup, Label, Input, Row, Col, Jumbotron } from 'reactstrap';
+import {Button, Form, FormGroup, Label, Input, Row, Col, Jumbotron, Table } from 'reactstrap';
 import { getCategories, searchDonor} from "./helper/userApiCalls";
 import { isAuthenticated } from '../auth/helper';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPhoneAlt } from '@fortawesome/free-solid-svg-icons'
 // import PlacesAutocomplete, {
 //     geocodeByAddress,
 //     getLatLng
@@ -22,7 +24,7 @@ const SearchForDonors = () => {
 
     const [donors, setDonors] = useState([]);
 
-    const {user, token} = isAuthenticated();
+    const { token} = isAuthenticated();
 
     // const [address, setAddress] = React.useState("");
     // const [coordinates, setCoordinates] = React.useState({
@@ -161,27 +163,26 @@ const SearchForDonors = () => {
                                     </Col>
                                 </Row>
                                 <hr className="my-2" />
-                                {donors.map((donor, index) =>{
-                                    return (
-                                        <div key={index}>
-                                            <Row >
-                                                <Col md="4">
-                                                    <h5 className="text-white text-center">{donor.firstName} {donor.lastName}</h5>
-                                                </Col>
-                                                <Col md="4">
-                                                    <Button className="btn btn-primary disabled" size="sm" >
-                                                    {donor.location}
-                                                    </Button>
-                                                </Col>
-                                                <Col md="4">
-                                                    <a className="btn btn-success" href={"tel:"+donor.phone}>{donor.phone}</a>
-                                                </Col>
-                                            </Row>
-                                            <hr className="my-2" />
-                                        </div>
-                                    );
-                                }
-                                )}
+                                    <Table className="text-white text-center">
+                                        <thead className="thead-dark">
+                                            <tr>
+                                            <th scope="col" className="th-sm">Donor Name</th>
+                                            <th scope="col" className="th-sm">Location</th>
+                                            <th scope="col" className="th-sm">Contact</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {donors.map((donor, index) => {
+                                                return(
+                                                    <tr key={index}>
+                                                        <th scope="row">{donor.firstName} {donor.lastName}</th>
+                                                        <td>{donor.location}</td>
+                                                        <td><a  className="btn btn-success button-primary"  href={"tel:"+donor.phone} ><FontAwesomeIcon icon={faPhoneAlt} /> Call</a></td>
+                                                    </tr>
+                                                );
+                                            })}
+                                        </tbody>
+                                    </Table>
                             </Col>
                         </Row>
                 </Jumbotron>

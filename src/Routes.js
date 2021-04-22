@@ -13,6 +13,9 @@ import ManageCategories from "./admin/ManageCategories";
 import SignupAsDonor from './user/SignUpAsDonor';
 import ManageDonors from "./admin/ManageDonors";
 import SearchForDonors from './user/SearchForDonors';
+import Resources from './user/Resources';
+import CreateResource from './user/CreateResource';
+import AvailableResources from './user/AvailableResource';
 
 
 const Routes = () => {
@@ -20,6 +23,10 @@ const Routes = () => {
         <BrowserRouter>
             <Switch>
                 <Route path="/" exact component={Home} />
+                <Route path="/resource" exact component={Resources} />
+                <Route path="/resource/create" exact component={CreateResource} />
+                <Route path="/resource/available" exact component={AvailableResources} />
+                <Route path="/signup" exact component={Signup} />
                 <Route path="/signup" exact component={Signup} />
                 <Route path="/signin" exact component={Signin} />
                 <Route path="/user/:userId/dashboard" exact component={UserDashboard} />
