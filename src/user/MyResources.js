@@ -10,7 +10,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencilAlt, faTrashAlt} from '@fortawesome/free-solid-svg-icons';
 import { isAuthenticated } from '../auth/helper';
-import {getMyResources} from "../user/helper/userApiCalls";
+import {getMyResources, deleteResource} from "../user/helper/userApiCalls";
 
 
 const MyResources = () => {
@@ -35,11 +35,22 @@ const MyResources = () => {
         preload();
     }, [])
 
+    const handleDeleteResource = resourceId => {
+        deleteResource(resourceId, user._id,)
+            .then(data => {
+                if(data.error) {
+                    console.log(data.error);
+                }else{
+                    preload();
+                }
+            })
+    }
+
     return(
         <Base>
             <Container fluid>
                 <Row className="mt-4">
-                    <Col Col md="12" sm="6">
+                    <Col md="12" sm="6">
                         <Jumbotron className="jumbotron-custom text-center" >
                             <h1 className="display-5 text-center pb-2">Available Resources</h1>
                             <hr className="my-2" />
@@ -66,7 +77,9 @@ const MyResources = () => {
                                                     <td>{resource.location}</td>
                                                     <td>{resource.units}</td>
                                                     <td><a  className="btn btn-warning button-primary"  href={"tel:"+resource.contactNumber} ><FontAwesomeIcon icon={faPencilAlt} /> Modify</a></td>
-                                                    <td><a  className="btn btn-danger button-primary"  href={"tel:"+resource.contactNumber} ><FontAwesomeIcon icon={faTrashAlt} /> Delete</a></td>
+                                                    <td><a  className="btn btn-danger button-primary"><FontAwesomeIcon icon={faTrashAlt} onClick={() => {
+                                                        handleDeleteResource(resource._id)
+                                                    }}/> Delete</a></td>
                                                 </tr>
                                             );
                                         })}

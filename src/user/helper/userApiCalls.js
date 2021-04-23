@@ -73,3 +73,16 @@ export const getMyResources = (userId) => {
         })
         .catch(err => console.log(err));
 } 
+
+export const deleteResource = (resourceId, userId) => {
+    return fetch(`${API}/user/${userId}/resource/${resourceId}`,{
+        method : "DELETE",
+        headers : {
+            Accept : "application/json",
+        }
+    })
+    .then(response => {
+        return response.json();
+    })
+    .catch(err => console.log(err));
+}
