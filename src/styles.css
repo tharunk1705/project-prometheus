@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700&family=Lexend+Deca&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Satisfy&display=swap');
 
 html {
     height: 100%;
@@ -23,10 +23,10 @@ body {
     width: 100vw;
 }
 .navbar-brand {
-    font-family: 'Questrial', sans-serif !important;
-    font-weight: 700;
+    font-family: 'Satisfy', cursive !important;
+    /* font-family: 'Questrial', sans-serif !important; */
     font-size: xx-large !important;
-    letter-spacing: 1.2px;
+    letter-spacing: 1.5px;
 }
 .menu .navbar-brand {
     text-shadow: 3px 5px 5px rgba(0, 0, 0, 0.4), -3px -5px 5px rgba(0, 0, 0, 0.4);

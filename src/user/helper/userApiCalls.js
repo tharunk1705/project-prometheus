@@ -63,3 +63,13 @@ export const getAllResources = () => {
         })
         .catch(err => console.log(err));
 } 
+
+export const getMyResources = (userId) => {
+    return fetch(`${API}/user/${userId}/resource`,{
+        method : "GET"
+    })
+        .then(response => {
+            return response.json();
+        })
+        .catch(err => console.log(err));
+} 

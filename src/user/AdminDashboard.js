@@ -47,6 +47,11 @@ const AdminDashboard = () => {
                                         Manage Donors
                                     </Link>
                                 </ListGroupItem>
+                                <ListGroupItem>
+                                    <Link to="/user/:userId/resource">
+                                        Created Resources
+                                    </Link>
+                                </ListGroupItem>
                             </ListGroup>
                         </Jumbotron>
                     </Col>

@@ -41,8 +41,7 @@ const UserDashboard = () => {
                                 <Col md={{size : "4", offset : "2"}} >Phone : </Col>
                                 <Col md="6">{phone}</Col>
                             </Row>
-                            <Row>
-                                
+                            <Row className="mt-4">
                                 {isAuthenticated() && isAuthenticated().user.isDonor === false && (
                                     <>
                                         <Col   md="6">
@@ -61,6 +60,11 @@ const UserDashboard = () => {
                                     </>
                                 )}
                                 
+                            </Row>
+                            <Row className="mt-4">
+                                <Col md="12">
+                                    <Button color="primary" className="mt-4" tag={Link} to={`/user/${_id}/resource`} block>Manage Created Resources</Button> 
+                                </Col>
                             </Row>
                             
                         </Jumbotron>

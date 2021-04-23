@@ -16,6 +16,7 @@ import SearchForDonors from './user/SearchForDonors';
 import Resources from './user/Resources';
 import CreateResource from './user/CreateResource';
 import AvailableResources from './user/AvailableResource';
+import MyResources from './user/MyResources';
 
 
 const Routes = () => {
@@ -31,6 +32,8 @@ const Routes = () => {
                 <Route path="/signin" exact component={Signin} />
                 <Route path="/user/:userId/dashboard" exact component={UserDashboard} />
                 <Route path="/user/search" exact component={SearchForDonors} />
+                <Route path="/user/:userId/resource" exact component={MyResources} />
+                <Route path="/user/:userId/signup-as-donor" exact component={SignupAsDonor} />
                 <Route path="/user/:userId/signup-as-donor" exact component={SignupAsDonor} />
                 <AdminRoute path="/admin/dashboard" exact component={AdminDashboard} />
                 <AdminRoute path="/admin/create/category" exact component={AddCategory} />
